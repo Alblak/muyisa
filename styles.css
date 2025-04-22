@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    width: 800px;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.left-side {
+    flex: 1;
+    background-color: #000; /* Fond noir */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.left-side .devise {
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.right-side {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    width: 100%;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.input-group i {
+    margin-right: 10px;
+    color: #777;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .left-side {
+        display: none; /* Cache la partie gauche sur les petits écrans */
+    }
+
+    .login-container {
+        width: 90%; /* Réduit la largeur du conteneur */
+    }
+
+    .right-side {
+        padding: 20px; /* Réduit l'espacement */
+    }
+}
+
+
+
+
+
+
+.round-photo-container {
+    width: 200px; /* Taille du conteneur */
+    height: 200px; /* Taille du conteneur */
+    border-radius: 50%; /* Rend le conteneur rond */
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre pour un effet visuel */
+}
+
+.round-photo {
+    width: 100%; /* L'image occupe toute la largeur du conteneur */
+    height: 100%; /* L'image occupe toute la hauteur du conteneur */
+    object-fit: cover; /* Ajuste l'image pour couvrir tout l'espace sans déformation */
+}
+
+
+
+
+/* Personnaliser DataTables */
+#ordersTable_wrapper {
+    margin-top: 20px;
+}
+
+#ordersTable_filter input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+#ordersTable_paginate .paginate_button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#ordersTable_paginate .paginate_button.current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
