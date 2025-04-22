@@ -16,3 +16,4 @@
   <link href="../assets/css/style.css" rel="stylesheet">
   <link href="../assets/css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="../views/nav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">

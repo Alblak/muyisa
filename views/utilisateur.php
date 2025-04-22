@@ -74,7 +74,7 @@ include_once('../include/menu.php');
                     <?php
                 }else { ?>
                                 <div>
-                                  <form  class="shadow  p-3 m-3" action="<?=$action?>" method="POST" enctype="multipart/form-data">
+                                  <form  class="shadow  p-3 m-3" action="<?=$action?>" id="uploadForm" method="POST" enctype="multipart/form-data">
                                   <h5 class="card-title text-center "><?=$titre?></h5>
                                     <div class="row">
                                         
@@ -114,11 +114,11 @@ include_once('../include/menu.php');
                                             <input autocomplete="off" required type="text" class="form-control" placeholder=""  name="motdepasse" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['password']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 p-3">
-                                                <label for="">Photo</span></label>
+                                            <label for="">Photo</span></label>
                                             <input autocomplete="off" required type="file" class="form-control" id="photo" name="photo" <?php if(isset($id)) { ?> value="<?= $ModData['photo'] ?>" <?php } ?>>
                                             <!-- Zone de prévisualisation et de recadrage -->
                                             <div id="imagePreview" style="display: none; margin-top: 20px;">
-                                                <img id="previewImage" src="#" alt="Prévisualisation de l'image" style="max-width: 50%;">
+                                                <img id="previewImage" src="#" alt="Prévisualisation de l'image" style="max-width: 30%;">
                                             </div>
                                             <!-- Champ caché pour l'image recadrée -->
                                             <input type="hidden" id="croppedImage" name="croppedImage">
@@ -183,7 +183,7 @@ include_once('../include/menu.php');
                                             <th scope="row"><?php echo $numero; ?></th>
                                        
                                             <td><?=$data['nom']." ".$data['postnom']." ".$data['prenom'] ?></td>
-                                            <th scope="row"><a href="../assets/img/produit/<?= $data['photo'] ?>"><img src="../assets/img/produit/<?= $data['photo'] ?>" alt="" width=40></a></th>
+                                            <th scope="row"><a href="../assets/img/profils/<?= $data['photo'] ?>"><img src="../assets/img/profils/<?= $data['photo'] ?>" alt="" width=40></a></th>
                                             <td><?=$data['username'] ?></td>
                                             <td><?=$data['password']?></td>
                                             <td><?=$data['fonction']?></td>
@@ -240,8 +240,7 @@ include_once('../include/menu.php');
     ?>
 
  
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 <script src="cropper.min.js"></script>
   <script>
     document.getElementById('photo').addEventListener('change', function(event) {
@@ -288,7 +287,7 @@ include_once('../include/menu.php');
             reader.readAsDataURL(file);
         }
     });
-  </script> -->
+  </script> 
 </body>
 
 </html>
