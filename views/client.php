@@ -1,6 +1,6 @@
 <?php 
 include('../connexion/connexion.php');
-include_once('../models/select/sel-utilisateur.php');
+include_once('../models/select/sel-client.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@ include_once('../models/select/sel-utilisateur.php');
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Utilisateur</title>
+  <title>client</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -37,7 +37,7 @@ include_once('../include/menu.php');
     
             <div class="col-120 bg-dark position-fixed m-auto p-3">
             
-                <h2 class=" text-success">Utilisateur</h2>
+                <h2 class=" text-success">client</h2>
               
             </div><!-- End Page Title -->
        
@@ -56,7 +56,7 @@ include_once('../include/menu.php');
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-6 bg-black card p-3 shadow   m-3">
                                 <div class="card-header text-dark d-flex justify-content-between">
                                     <b class="text-white">Supprimer</b>
-                                    <a href="utilisateur.php" class="btn btn-outline-danger text-white"><b><i class="bi bi-x"></i></b></a>
+                                    <a href="client.php" class="btn btn-outline-danger text-white"><b><i class="bi bi-x"></i></b></a>
                                     
                                 </div>
                                 <div class="card-body py-3  text-white">
@@ -65,8 +65,8 @@ include_once('../include/menu.php');
                                     <em class="mt-3 text-danger">NB: cette action est irréversible</em>
                                 </div>
                                 <div class="card-footer">
-                                    <a href='../models/del/del-utilisateur.php?id=<?=$_GET['idsup'] ?>' class="btn btn-outline-danger">Supprimer</a>
-                                    <a href="utilisateur.php" class="btn btn-success">Annuler</a>
+                                    <a href='../models/del/del-client.php?id=<?=$_GET['idsup'] ?>' class="btn btn-outline-danger">Supprimer</a>
+                                    <a href="client.php" class="btn btn-success">Annuler</a>
                                 </div>
 
                             </div>
@@ -80,47 +80,45 @@ include_once('../include/menu.php');
                                         
                                          <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 p-3">
                                             <label for="">Nom</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KAMBALE"  name="nom" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['nom']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KAMBALE"  name="nom" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['nom']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 p-3">
                                             <label for="">Postnom</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KAMALA"  name="postnom" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['postnom']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KILIMA"  name="postnom" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['postnom']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 p-3">
                                             <label for="">Prenom</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:Albert"  name="prenom" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prenom']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:Julien"  name="prenom" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['prenom']?>" <?php } ?>> 
                                         </div>
                                  
-                                        
+                                      
                                         <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                            <label for="">fonction</span></label>
-                                            <select name="fonction" id="fonction" class="form-select">
-                                                <?php if(isset($_GET['id'])){ ?>
-                                                    <option value="caissiere">Caissiere</option>
-                                                    <option <?php if($modData['fonction']=="comptable"){ ?> Selected <?php } ?> value="comptable">Comptable</option>
-                                                    <option <?php if($modData['fonction']=="gerant"){ ?> Selected <?php } ?> value="gerant">gerant</option>
-                                                    <option <?php if($modData['fonction']=="pdg"){ ?> Selected <?php } ?> value="pdg">PDG</option>
+                                            <label for="">genre</span></label>
+                                            <select name="genre" id="genre" class="form-select">
+                                                <?php if(isset($_GET['numero'])){ ?>
+                                                    <option value="F">feminin</option>
+                                                    <option <?php if($modData['genre']=="M"){ ?> Selected <?php } ?> value="M">masculin</option>
+                                                 
                                                 <?php }else{?>
-                                                    <option value="caissiere">Caissiere</option>
-                                                    <option value="comptable">Comptable</option>
-                                                    <option  value="gerant">gerant</option>
-                                                    <option  value="pdg">PDG</option>
+                                                    <option value="F">feminin</option>
+                                                    <option value="M">masculin</option>
+                                                   
                                                 <?php }  ?>
                                             </select>
                                             
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                            <label for="">Mot de passe</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder=""  name="motdepasse" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['password']?>" <?php } ?>> 
+                                            <label for=""> N° Telephone</span></label>
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="ex:0991147624"  name="telephone" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['telephone']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 p-3">
                                             <label for="">Photo</span></label>
                                             <input autocomplete="off" required type="file" class="form-control" id="photo" name="photo" <?php if(isset($id)) { ?> value="<?= $ModData['photo'] ?>" <?php } ?>>
-                                            <!-- Zone de prévisualisation et de recadrage -->
+                                            
                                             <div id="imagePreview" style="display: none; margin-top: 20px;">
                                                 <img id="previewImage" src="#" alt="Prévisualisation de l'image" style="max-width: 30%;">
                                             </div>
-                                            <!-- Champ caché pour l'image recadrée -->
+                                            
                                             <input type="hidden" id="croppedImage" name="croppedImage">
                                         </div>
                                                         <div class="col-xl-12 col-lg-12 col-md-12 mt-10 col-sm-12 p-3 aling-center">
@@ -135,13 +133,13 @@ include_once('../include/menu.php');
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 ">
                                    
-                                    <?php if(isset($_GET['id'])){?>
+                                    <?php if(isset($_GET['numero'])){?>
                                       <div class="row">
                                           <div class="col-xl-8 col-lg-8 col-md-8  col-sm-8">
                                             <input type="submit" class="btn btn-success text-white p-2 mt-1 w-100" name="valider" value="<?=$bouton?>">
                                           </div>
                                           <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4">
-                                            <a href="utilisateur.php" class="btn btn-dark p-2  mt-1 w-100">Annuler</a>
+                                            <a href="client.php" class="btn btn-dark p-2  mt-1 w-100">Annuler</a>
                                         </div>
                                       </div>
                                     <?php }else {?>
@@ -157,16 +155,15 @@ include_once('../include/menu.php');
 
                             <div class="shadow p-3">
                                 <table class="table datatable ">
-                                <h4 class="p-3 ">Liste des utilisateurs</h4>
+                                <h4 class="p-3 ">Liste des clients</h4>
                                     <thead>
                                         <tr>
-                                            <th scope="col">N°</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">numero</th>
                                             <th scope="col">Profil</th>  
                                             <th scope="col">Noms</th>
-                                            
-                                            <th scope="col"> Username</th>
-                                            <th scope="col"> mot de passe</th>
-                                            <th scope="col">fonction</th>
+                                            <th scope="col">genre</th>
+                                            <th scope="col">N° Telephone</th>
                                             <th scope="col">Action</th>
 
                                         </tr>
@@ -181,18 +178,16 @@ include_once('../include/menu.php');
                                         ?>
                                        <tr>
                                             <th scope="row"><?php echo $numero; ?></th>
-                                       
-                                           
-                                            <th scope="row"><a href="../assets/img/profils/<?= $data['photo'] ?>"><img src="../assets/img/profils/<?= $data['photo'] ?>" alt="" width=40></a></th>
+                                            <th scope="row"><?=$data['numero']?></th>
+                                            <th scope="row"><a href="../assets/img/clients/<?= $data['photo'] ?>"><img src="../assets/img/clients/<?= $data['photo'] ?>" alt="" width=40></a></th>
                                             <td><?=$data['nom']." ".$data['postnom']." ".$data['prenom'] ?></td>
-                                            <td><?=$data['username'] ?></td>
-                                            <td><?=$data['password']?></td>
-                                            <td><?=$data['fonction']?></td>
+                                            <td><?=$data['genre']?></td>
+                                            <td><?=$data['telephone']?></td>
                                             <td>
-                                                <a href="utilisateur.php?id=<?=$data['id']?>" class="btn btn-success btn-sm "><i
+                                                <a href="client.php?numero=<?=$data['numero']?>" class="btn btn-success btn-sm "><i
                                                         class="bi bi-pencil-square"></i></a>
                                                 <a 
-                                                    href="?idsup=<?=$data['id']?>"
+                                                    href="?idsup=<?=$data['numero']?>"
                                                     class="btn btn-dark btn-sm "><i class="bi bi-trash3-fill"></i></a>
                                             </td>
 
