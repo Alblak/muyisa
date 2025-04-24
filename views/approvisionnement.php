@@ -86,6 +86,21 @@ include_once('../include/menu.php');
                                             <label for="">montant</span></label>
                                             <input autocomplete="off" required type="number"  step="0.01" class="form-control" placeholder="Ex:1500"  name="montant" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['montant']?>" <?php } ?>> 
                                         </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 p-3">
+                                            <label for="">type</span></label>
+                                            <select name="type" id="type" class="form-select">
+                                                <?php if(isset($_GET['id'])){ ?>
+                                                    <option value="essence">essence</option>
+                                                    <option <?php if($modData['type']=="mazout"){ ?> Selected <?php } ?> value="mazout">mazout</option>
+                                                  
+                                                <?php }else{?>
+                                                    <option value="essence">essence</option>
+                                                    <option value="mazout">mazout</option>
+                                                  
+                                                <?php }  ?>
+                                            </select>
+                                            
+                                        </div>
                                         
                                  
                                         <div class="col-xl-12 col-lg-12 col-md-12 mt-10 col-sm-12 p-3 aling-center">
@@ -125,6 +140,7 @@ include_once('../include/menu.php');
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">date</th>
+                                            <th scope="col">Type</th>  
                                             <th scope="col">Quantite</th>  
                                             <th scope="col">Montant</th>  
                                             <th scope="col">Action</th>
@@ -142,6 +158,7 @@ include_once('../include/menu.php');
                                        <tr>
                                             <th scope="row"><?php echo $id; ?></th>
                                             <td><?php $dates=strtotime($data["dates"]); echo date('d/m/Y ',$dates);?> </td>
+                                            <td><?=$data['type']?> </td>
                                             <td><?=$data['quantite']?> L</td>
                                             <td><?=$data['montant']?></td>
                                             <td>
