@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
     $genre=htmlspecialchars($_POST['genre']);
     $telephone=htmlspecialchars($_POST['telephone']);
     $numero="";
-    if(!is_numeric($telephone) && strlen($telephone)!=10)
+    if(!is_numeric($telephone))
     {
         $_SESSION['notif']="numero incorrect";
         $_SESSION['color']='danger';

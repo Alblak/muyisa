@@ -33,12 +33,5 @@ if(isset($_POST['valider']))
 }
 
 
-if (isset($_POST["valider"])) 
-{
-    $date=date("Y-m-d");
-    $equivalent=htmlspecialchars($_POST['equivalent']);
-   
-   
- }
 
 ?>
