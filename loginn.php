@@ -20,7 +20,7 @@ include('connexion/connexion.php');
             <div class="background-dark  bg-success">
                 <div class="devise">
                     <center><div class="round-photo-container">
-                        <img src="assets/img/logo.png" alt="Photo ronde" class="round-photo">
+                        <img src="assets/img/logoo.jpg" alt="Photo ronde" class="round-photo">
                     </div></center>
                     <p>"carburant de qualite"</p>
                 </div>

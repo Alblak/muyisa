@@ -1,4 +1,4 @@
-<link href="../assets/img/logo.png" rel="icon">
+<link href="../assets/img/logoo.jpg" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
