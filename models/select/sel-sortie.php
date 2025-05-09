@@ -91,7 +91,7 @@ else
 }
 $quantite_sortieM=$quantite_sortieMF+$quantite_sortieML;
 
-$sel_approvisionnementE=$connexion->prepare("SELECT SUM(quantite) as quantite from approvisionnement where type='essence' and supprimer=0");
+$sel_approvisionnementE=$connexion->prepare("SELECT SUM(quantite_essence) as quantite from entree where supprimer=0");
 $sel_approvisionnementE->execute();
 $approvisionnementE=$sel_approvisionnementE->fetch();
 if($approvisionnementE['quantite']<=0)
@@ -104,7 +104,7 @@ else
     $_SESSION['stock_essence']=$quantite_approvisionnementE-$quantite_sortieE;
 }
 
-$sel_approvisionnementM=$connexion->prepare("SELECT SUM(quantite) as quantite from approvisionnement where type='mazout' and supprimer=0");
+$sel_approvisionnementM=$connexion->prepare("SELECT SUM(quantite_mazout) as quantite from entree where  supprimer=0");
 $sel_approvisionnementM->execute();
 $approvisionnementM=$sel_approvisionnementM->fetch();
 if($approvisionnementM['quantite']<=0)
