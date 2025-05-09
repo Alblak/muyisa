@@ -73,34 +73,59 @@ include_once('../include/menu.php');
                         </div>
                     <?php
                 }else { ?>
+                     <?php if(isset($_GET['new'])){?>
+                        <div class="shadow p-3 row">
+                                    <center><h2>Choisir la commande</h2></center>
+                            <?php while($commande=$SelCom->fetch()){?>
+                                <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6  ">
+                                    <a class=" btn btn-white shadow m-3 w-100" href="approvisionnement.php?com=<?=$commande['id']?>">
+                                        <div class=row>
+                                            <div class="col-12">
+                                                <div class="row">
+                                               
+                                                    <div class="col-12">
+                                                        Date : <?php $dates=strtotime($commande["dates"]); echo date('d/m/Y ',$dates);?>
+                                                         <br>
+                                                        <b>N° Commande: </b><?php echo sprintf('%04d', $commande['numcommande']);?>
+                                                        <br>
+                                                        <b>fournisseur : </b><?=$commande['nom'].' '.$commande['postnom'].' '.$commande['prenom']?>
+                                                        <br>
+                                                        <?php 
+                                                        $com= $commande['id'];
+                                                        $req=$connexion->prepare("SELECT * from panier_ap where commande=?");
+                                                        $req->execute(array($com));
+                                                        while($sPanier=$req->fetch()){ ?>
+                                                        <?=$sPanier['type']." : ".$sPanier['quantite']?> m3<br>
+
+                                                       <?php  }
+
+                                                        ?>
+                                                    </div>
+                                                    
+                                                    
+                                            </div>
+                                                                    
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php }?>
+                        </div>
+                     <?php }else if(isset($_GET['com'])){ ?>
                                 <div>
                                   <form  class="shadow  p-3 m-3" action="<?=$action?>" id="uploadForm" method="POST" enctype="multipart/form-data">
                                   <h5 class="card-title text-center "><?=$titre?></h5>
                                     <div class="row">
                                         
                                          <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                            <label for="">quantite en Littre</span></label>
-                                            <input autocomplete="off" required type="number"  step="0.01" class="form-control" placeholder="Ex:999.5"  name="quantite" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['quantite']?>" <?php } ?>> 
+                                            <label for=""><span>quantite essence</span><?=$_SESSION['quantite_essence']?></label>
+                                            <input  required type="number"  max="<?=$_SESSION['quantite_essence']?>" step="0.01" class="form-control" placeholder="Ex:999.5"  name="quantite_essence" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['quantite']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                            <label for="">montant</span></label>
-                                            <input autocomplete="off" required type="number"  step="0.01" class="form-control" placeholder="Ex:1500"  name="montant" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['montant']?>" <?php } ?>> 
+                                            <label for="">quantite  mazout <?=$_SESSION['quantite_mazout']?></span></label>
+                                            <input autocomplete="off" required type="number" max="<?=$_SESSION['quantite_mazout']?>" step="0.01" class="form-control" placeholder="Ex:999.5"  name="quantite_mazout" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['quantite']?>" <?php } ?>> 
                                         </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 p-3">
-                                            <label for="">type</span></label>
-                                            <select name="type" id="type" class="form-select">
-                                                <?php if(isset($_GET['id'])){ ?>
-                                                    <option value="essence">essence</option>
-                                                    <option <?php if($modData['type']=="mazout"){ ?> Selected <?php } ?> value="mazout">mazout</option>
-                                                  
-                                                <?php }else{?>
-                                                    <option value="essence">essence</option>
-                                                    <option value="mazout">mazout</option>
-                                                  
-                                                <?php }  ?>
-                                            </select>
-                                            
-                                        </div>
+                                   
                                         
                                  
                                         <div class="col-xl-12 col-lg-12 col-md-12 mt-10 col-sm-12 p-3 aling-center">
@@ -131,7 +156,10 @@ include_once('../include/menu.php');
                 
                                   </form>
                                 </div>
-                  <?php }  ?>
+                    <?php }else { ?>
+                        <a href=" approvisionnement.php?new" class="col-12 btn btn-outline-success">nouvel approvisionnement</a> 
+                        <?php } ?>
+                <?php }  ?>
 
                             <div class="shadow p-3">
                                 <table class="table datatable ">
@@ -140,9 +168,11 @@ include_once('../include/menu.php');
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">date</th>
-                                            <th scope="col">Type</th>  
-                                            <th scope="col">Quantite</th>  
-                                            <th scope="col">Montant</th>  
+                                            <th scope="col">N°commande</th>
+                                            <th scope="col">fournisseur</th>
+                                            <th scope="col">quantite_essence</th>  
+                                            <th scope="col">quantite_essence</th>  
+                                            <th scope="col">reste</th>  
                                             <th scope="col">Action</th>
 
                                         </tr>
@@ -158,9 +188,11 @@ include_once('../include/menu.php');
                                        <tr>
                                             <th scope="row"><?php echo $id; ?></th>
                                             <td><?php $dates=strtotime($data["dates"]); echo date('d/m/Y ',$dates);?> </td>
-                                            <td><?=$data['type']?> </td>
-                                            <td><?=$data['quantite']?> L</td>
-                                            <td><?=$data['montant']?></td>
+                                            <td><?php echo sprintf('%04d', $data['numcommande']);?></td>
+                                            <td><?=$data['prenom']?> </td>
+                                            <td><?=$data['quantite_essence']?> L</td>
+                                            <td><?=$data['quantite_mazout']?> L</td>
+                                            <td><?=$data['reste_argent']?> $</td>
                                             <td>
                                                 <a href="approvisionnement.php?id=<?=$data['id']?>" class="btn btn-success btn-sm "><i
                                                         class="bi bi-pencil-square"></i></a>
