@@ -22,7 +22,7 @@ include('connexion/connexion.php');
                     <center><div class="round-photo-container">
                         <img src="assets/img/logoo.jpg" alt="Photo ronde" class="round-photo">
                     </div></center>
-                    <p>"carburant de qualite"</p>
+                    <p>"votre partenaire de confiance en carburant"</p>
                 </div>
             </div>
         </div>

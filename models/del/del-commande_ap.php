@@ -1,0 +1,40 @@
+<?php 
+include('../../connexion/connexion.php');
+if(isset($_GET['iddelcom']))
+{
+    $id=$_GET['iddelcom'];
+    $req=$connexion->prepare("DELETE FROM commande where id=?");
+    $req->execute(array($id));
+    if($req){
+        $reqq=$connexion->prepare("DELETE FROM panier_ap where commande=?");
+        $reqq->execute(array($id));
+        $_SESSION['notif']="suppression  reussie";
+        header("location:../../views/commande_ap.php");
+    }
+}
+if(isset($_GET['iddelpanier']))
+{
+        $com=$_GET['com'];
+        $id=$_GET['iddelpanier'];
+        $req=$connexion->prepare("DELETE FROM panier_ap where id=?");
+        $req->execute(array($id));
+        $_SESSION['notif']="suppression  reussie";
+        header("location:../../views/commande_ap.php?com=$com");
+    
+}
+
+if(isset($_GET['cancel']))
+{
+
+    $id=$_GET['cancel'];
+    $req=$connexion->prepare("DELETE FROM commande where id=?");
+    $req->execute(array($id));
+    if($req)
+    {
+        $reqq=$connexion->prepare("DELETE FROM panier_ap where commande=?");
+        $reqq->execute(array($id));
+        $_SESSION['notif']="une commande a ete annuler";
+        header("location:../../views/commande_ap.php");
+
+    }
+}
