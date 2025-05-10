@@ -95,8 +95,8 @@ include_once('../include/menu.php');
                                             </div>
                                             <div class="col-xl-8 col-lg-8 col-md-8  col-sm-8 p-3">
                                                 <center><h2>PRIX DU JOUR</h2></center>
-                                                <!-- <center><h2>1 L essence = <?=$last['prix_essenceL']?> FC</h2></center>
-                                                <center><h2>1 L mazout = <?=$last['prix_mazoutL']?> FC</h2></center> -->
+                                                <!-- <center><h2>1 L essence = <?=$last['prix_essenceL']?> $</h2></center>
+                                                <center><h2>1 L mazout = <?=$last['prix_mazoutL']?> $</h2></center> -->
                                                 <center>
                                                     <table border='1'>
                                                         <thead>
@@ -106,14 +106,14 @@ include_once('../include/menu.php');
                                                         </thead>
                                                         <tbody>
                                                             <tr >
-                                                                <td>1L = <?=$last['prix_essenceL']?>fc</td>
+                                                                <td>1L = <?=$last['prix_essenceL']?>$</td>
                                                                 
-                                                                <td>.   1L= <?=$last['prix_mazoutL']?>fc</td>
+                                                                <td>.   1L= <?=$last['prix_mazoutL']?>$</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>1 fut = <?=$last['prix_essenceF']?>fc</td>
+                                                                <td>1 fut = <?=$last['prix_essenceF']?>$</td>
                                                                 
-                                                                <td>.    1 fut= <?=$last['prix_mazoutF']?>fc</td>
+                                                                <td>.    1 fut= <?=$last['prix_mazoutF']?>$</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -130,20 +130,20 @@ include_once('../include/menu.php');
                                         <div class="row">
                                             
                                             <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                                <label for="">Prix essence en FC par litre </span></label>
-                                                <input autocomplete="off" required type="number" class="form-control" placeholder="ex: 2800"  name="prix_essenceL" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_essenceL']?>" <?php } ?>> 
+                                                <label for="">Prix essence en $ par litre </span></label>
+                                                <input autocomplete="off" required type="number" class="form-control" step="0.01" placeholder="ex: 2800"  name="prix_essenceL" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_essenceL']?>" <?php } ?>> 
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                                <label for="">Prix mazout en FC par litre</span></label>
-                                                <input autocomplete="off" required type="number" class="form-control" placeholder="ex: 2800"  name="prix_mazoutL" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_mazoutL']?>" <?php } ?>> 
+                                                <label for="">Prix mazout en $ par litre</span></label>
+                                                <input autocomplete="off" required type="number" class="form-control" step="0.01" placeholder="ex: 2800"  name="prix_mazoutL" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_mazoutL']?>" <?php } ?>> 
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                                <label for="">Prix essence en FC par fut </span></label>
-                                                <input autocomplete="off" required type="number" class="form-control" placeholder="ex: 280000"  name="prix_essenceF" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_essenceF']?>" <?php } ?>> 
+                                                <label for="">Prix essence en $ par fut </span></label>
+                                                <input autocomplete="off" required type="number" class="form-control" step="0.01" placeholder="ex: 280000"  name="prix_essenceF" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_essenceF']?>" <?php } ?>> 
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
-                                                <label for="">Prix mazout en FC par fut</span></label>
-                                                <input autocomplete="off" required type="number" class="form-control" placeholder="ex: 2800"  name="prix_mazoutF" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_mazoutF']?>" <?php } ?>> 
+                                                <label for="">Prix mazout en $ par fut</span></label>
+                                                <input autocomplete="off" required type="number" class="form-control" step="0.01" placeholder="ex: 2800"  name="prix_mazoutF" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prix_mazoutF']?>" <?php } ?>> 
                                             </div>
                                             
                                         <div class="col-xl-12 col-lg-12 col-md-12 mt-10 col-sm-12 p-3 aling-center">
@@ -204,10 +204,10 @@ include_once('../include/menu.php');
                                        <tr>
                                             <th scope="row"><?php echo $numero; ?></th>
                                             <td><?php $dates=strtotime($data["dates"]); echo date('d/m/Y ',$dates);?> </td>
-                                            <td><?=$data['prix_essenceL']?> FC</td>
-                                            <td><?=$data['prix_essenceF']?> FC</td>
-                                            <td><?=$data['prix_mazoutL']?> FC</td>
-                                            <td><?=$data['prix_mazoutF']?> FC</td>
+                                            <td><?=$data['prix_essenceL']?> $</td>
+                                            <td><?=$data['prix_essenceF']?> $</td>
+                                            <td><?=$data['prix_mazoutL']?> $</td>
+                                            <td><?=$data['prix_mazoutF']?> $</td>
                                            
 
                                        </tr>

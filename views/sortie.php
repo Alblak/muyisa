@@ -4,33 +4,10 @@ include_once('../models/select/sel-sortie.php');
 if(isset($_GET['idclient']))
 {
 
-    $sel_lastnum=$connexion->prepare("SELECT numfacture from commande order by  id desc limit 1");
-    $sel_lastnum->execute();
-    $numfacutre=0;
-    if($last=$sel_lastnum->fetch())
-    {
-        $numfacutre=$last['numfacture']+1;
-       
-    }
-    else
-    {
-        $numfacutre=1;
-       
-    }
+   
   
 
-    $date=date('Y-m-d');
-    $client=$_GET['idclient'];
-    $req=$connexion->prepare("INSERT INTO commande(dates,client,numfacture) values (?,?,?)");
-    $req->execute(array($date,$client,$numfacutre));
-    if($req)
-    {
-        $sel_com=$connexion->prepare("SELECT commande.*,client.nom,client.postnom,client.prenom from client,commande where commande.client=client.numero and commande.dates=? and  commande.client=? order by commande.id desc LIMIT 1");
-        $sel_com->execute(array($date,$client));
-        $com=$sel_com->fetch();
-        $idcom=$com['id'];
-        header("location:sortie.php?new&com=$idcom");
-    }
+   
 }
 ?>
 <!DOCTYPE html>
@@ -132,7 +109,7 @@ include_once('../include/menu.php');
                                             ?>
                                         
                                             <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6  ">
-                                                <a class=" btn btn-white shadow m-3 w-100" href="sortie.php?new&idclient=<?=$Client['numero']?>">
+                                                <a class=" btn btn-white shadow m-3 w-100" href="sortie.php?idclient=<?=$Client['numero']?>">
                                                     <div class=row>
                                                         
                                                         <div class="col-12">
@@ -215,14 +192,14 @@ include_once('../include/menu.php');
                                                     <?php if(isset($_GET['id'])){?>
                                                     <div class="row">
                                                         <div class="col-xl-8 col-lg-8 col-md-8  col-sm-8">
-                                                            <input type="submit" class="btn btn-info text-white p-2 mt-1 w-100" name="valider" value="<?=$bouton?>">
+                                                            <input type="submit" class="btn btn-success text-white p-2 mt-1 w-100" name="valider" value="<?=$bouton?>">
                                                         </div>
                                                         <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4">
                                                             <a href="sortie.php" class="btn btn-dark p-2  mt-1 w-100">Annuler</a>
                                                         </div>
                                                     </div>
                                                     <?php }else {?>
-                                                            <input type="submit" class="btn btn-info text-white p-2 w-100" name="valider" value="valider">
+                                                            <input type="submit" class="btn btn-success text-white p-2 w-100" name="valider" value="valider">
                                                         <?php } ?>
                                                 </div>
                                             </div>
@@ -239,7 +216,8 @@ include_once('../include/menu.php');
 
                                             <h5>STATION ENERGIE MUYISA</h5>
                                             <p>CLIENT : <?=$detail['client'];?></p>
-                                            <p>date : <?php $dates=strtotime($detail["dates"]); echo date('d-m-Y',$dates);?></p>
+                                            <p>Date : <?php $dates=strtotime($detail["dates"]); echo date('d-m-Y',$dates);?></p>
+                                            <p>Paiement : <?php if($detail['type']==1){ echo "cash";}else { echo "credit";}?> </p>
                                         </div>
                                         <?php } ?>
                                         
@@ -248,9 +226,9 @@ include_once('../include/menu.php');
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">N°</th>
-                                                    <th scope="col">type</th>
-                                                    <th scope="col">Qte</th>
+                                                     <th scope="col">Qte</th>
+                                                    <th scope="col">designation</th>
+                                                   
                                                     <th scope="col">P.U</th>
                                                     <th scope="col">P.T</th>
                                                     <th scope="col">Action</th>
@@ -269,21 +247,22 @@ include_once('../include/menu.php');
                                                     $totalo=$total;
                                                 ?>
                                                 <tr>
-                                                    <td><?=$numero?></td>
-                                                    <td><?=$data['type']?></td>
                                                     <td><?=$data['quantite']?></td>
-                                                    <td><?=$data['prixunitaire']?> fc</td>
-                                                    <td><?=$PT?> fc</td>
+                                                   
+                                                    <td><?=$data['type_achat']." ".$data['type']?></td>
+                                                   
+                                                    <td><?=$data['prixunitaire']?> $</td>
+                                                    <td><?=$PT?> $</td>
                                                     <td>
                                                     
                                                         <a onclick=" return confirm('Voulez-vous vraiment supprimer ?')"
-                                                        href="../models/del/del-sortie.php?iddelpanier=<?=$data['id'] ?>"
+                                                        href="../models/del/del-sortie.php?iddelpanier=<?=$data['id']?>&com=<?=$_GET['com']?>"
                                                         class="btn btn-danger btn-sm "><i class="bi bi-trash3-fill"></i></a>
                                                     </td>
                                                 </tr> 
                                                 <?php } ?> 
                                                 <tr>
-                                                <td colspan='5'>TOTAL</td>
+                                                <td colspan='3'>TOTAL</td>
                                                 <td><?=$total?>$</td>
                                                 </tr>       
                                             </tbody>
@@ -299,7 +278,55 @@ include_once('../include/menu.php');
 
                                     
                             </div>
-                               
+
+                            <?php }else if(isset($_GET['idclient'])){ ?>
+                            
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12">
+                                         <form  class="shadow  p-3 m-3" action="../models/add/add-sortie.php?client=<?=$_GET['idclient']?>" method="POST">
+                                            <h5 class="card-title text-center "></h5>
+                                            <div class="row">
+                                                <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 p-3">
+                                                    <label for="">Type de vente</span></label>
+                                                    <select name="type" id="type" class="form-select">
+                                                        
+                                                            <option value="1">cash </option>
+                                                            <option value="2">credit</option>
+                                                        
+                                                    
+                                                    </select>
+                                                    
+                                                </div>
+                                               
+                                                
+                                                <div class="col-xl-12 col-lg-12 col-md-12 mt-10 col-sm-12 p-3 aling-center">
+
+
+                                                    <?php if(isset($_SESSION['notif'])){ ?>
+                                                        <center><p class="alert-<?=$_SESSION['color']?> alert">
+                                                        <b> <i class="bi bi-<?=$_SESSION['icon']?>">  <?php echo $_SESSION['notif']; unset($_SESSION['notif']) ?></i></b>
+                                                                
+                                                        </p></center> 
+                                                    <?php } ?> 
+                                                </div>
+                                                
+                                                <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 row">
+                                            
+                                                        <div class="col-xl-8 col-lg-8 col-md-8  col-sm-8">
+                                                            <input type="submit" class="btn btn-success text-white p-2 mt-1 w-100" name="valider_new" value="suivant">
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4">
+                                                            <a href="sortie.php" class="btn btn-dark p-2  mt-1 w-100">Annuler</a>
+                                                        </div>
+                                                    
+                                            </div>
+                                                
+                        
+                        
+                                        </form>
+                                    </div>
+                                   
+                                   </div>
                             
                             <?php }else{ ?>
                                 <center><h3> Quantite  stock essence = <?=$_SESSION['stock_essence']?> L</h3></center> 
@@ -325,6 +352,7 @@ include_once('../include/menu.php');
                                             <th scope="col">N°</th>  
                                             <th scope="col">Client</th>
                                             <th scope="col">Date</th>
+                                            <th scope="col">type achat</th>
                                             <th scope="col">montant</th>
                                             <th scope="col">Action</th>
 
@@ -332,11 +360,14 @@ include_once('../include/menu.php');
                                     </thead>
                                     <tbody>
                                         <?php 
-                                        $total=0;
+                                        
                                         $quantite=0;
                                         $numero=0;
+                                        $totalg=0;
                                         while($data=$SelData->fetch())
                                         { 
+                                             $total=0;
+                                           
                                             $com=$data['id'];
                                             $Selpanier=$connexion->prepare("SELECT * from panier where commande=?");
                                             $Selpanier->execute(array($com));
@@ -345,6 +376,7 @@ include_once('../include/menu.php');
                                             {
                                                 $tot=$panier['quantite']*$panier['prixunitaire'];
                                                 $total=$total+$tot;
+                                                $totalg=$totalg+$total;
                                             }
                                         
                                            
@@ -354,6 +386,7 @@ include_once('../include/menu.php');
                                             <th scope="row"><?php echo $numero; ?></th>
                                             <td><?=$data['nom']." ".$data['postnom']." ".$data['prenom']?></td>
                                             <td><?php $dates=strtotime($data["dates"]); echo date('d/m/Y',$dates);?></td>
+                                            <td> <?php if($data['type']==1){ echo "cash";}else { echo "credit";}?></td>
                                            
                                             <td><?=$total?>$</td>
                                             <td>
@@ -368,10 +401,10 @@ include_once('../include/menu.php');
                                
                                         <?php } ?>
                                         <tr>
-                                            <td colspan="3">TOTAL</td>
+                                            <td colspan="4">TOTAL</td>
                                            
                                           
-                                            <td><?=$total?> $</td>
+                                            <td><?=$totalg?> $</td>
                                        </tr>
                                     </tbody>
                                 </table>

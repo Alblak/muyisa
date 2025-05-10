@@ -18,7 +18,7 @@ if(isset($_GET['com']))
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Muysa</title>
+  <title>Muyisa</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -38,9 +38,9 @@ if(isset($_GET['com']))
             }
         }
 
- th, td {
-      border: 5px solid black; /* Ajoute une bordure noire */
-      border-collapse: collapse; /* Fusionne les bordures adjacentes */
+ th, td, tr {
+      border: 5px solid black; 
+      border-collapse: collapse; 
   }
  
 </style>
@@ -51,7 +51,7 @@ if(isset($_GET['com']))
 <body class='m-3'>
 <div class="row ">
     <div class="col-6 no-print mb-3">
-        <a href="sortie.php?new" class="btn btn-primary col-12 me-2">Nouvelle Facture</a>
+        <a href="sortie.php?new" class="btn btn-success col-12 me-2">Nouvelle Facture</a>
     </div>
     <!-- <div class="col-6 no-print mb-3">
         <button onclick="window.print()" class="btn btn-success col-12 me-2">Imprimer</button>
@@ -85,7 +85,12 @@ if(isset($_GET['com']))
       <br>
               <center>Facture n° <?php echo sprintf('%04d', $detail['numfacture']);?></center>
       <br>
-              Mr,Mme : <?php echo strtoupper($detail['nom']." ".$detail['postnom']);?></th>
+              Mr,Mme : <?php echo strtoupper($detail['nom']." ".$detail['postnom']);?>
+        <br>
+        PAIEMENT : <?php if($detail['type']==1){ echo "CASH";}else { echo "CREDIT";}?> 
+            
+            </th>
+              
         </tr>
             
           <tr class='fs-1'>
@@ -118,7 +123,7 @@ if(isset($_GET['com']))
         <?php } ?> 
         <tr class='fs-1'>
           <td colspan='3' ><strong>TOTAL</strong> </td>
-          <td><strong><center><?=$total?> FC</center></strong> </td>
+          <td><strong><center><?=$total?> $</center></strong> </td>
         </tr>  
         <tr>
             <td colspan='4' class='text-center'>
