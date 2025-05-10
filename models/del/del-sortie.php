@@ -14,11 +14,12 @@ if(isset($_GET['iddelcom']))
 }
 if(isset($_GET['iddelpanier']))
 {
-        $id=$_GET['iddelpanier'];
-        $req=$connexion->prepare("DELETE FROM panier where id=?");
-        $req->execute(array($id));
-        $_SESSION['notif']="suppression  reussie";
-        header("location:../../views/sortie.php");
+    $com=$_GET['com'];
+    $id=$_GET['iddelpanier'];
+    $req=$connexion->prepare("DELETE FROM panier where id=?");
+    $req->execute(array($id));
+    $_SESSION['notif']="suppression  reussie";
+    header("location:../../views/sortie.php?com=$com");
     
 }
 

@@ -15,7 +15,7 @@ if(isset($_GET['id']))
 else if(isset($_GET['idsup']))
 {
     $id=$_GET['idsup'];
-    $req=$connexion->prepare("SELECT sortie.id,client.numero,client.nom,client.postnom,client.prenom,sortie.datesortie,sortie.quantite,sortie.prix from client,sortie where client.numero=sortie.cacaoculteur and sortie.supprimer=0 AND sortie.id=?");
+    $req=$connexion->prepare("SELECT commande.id,client.numero,client.nom,client.postnom,client.prenom,commande.dates from client,commande where client.numero=commande.client and commande.supprimer=0 AND commande.id=?");
     $req->execute(array($id));
     $supprimer=$req->fetch();
     $titre="";

@@ -1,5 +1,36 @@
 <?php
 include("../../connexion/connexion.php");
+if(isset($_POST['valider_new']))
+{
+
+    $sel_lastnum=$connexion->prepare("SELECT numfacture from commande order by  id desc limit 1");
+    $sel_lastnum->execute();
+    $numfacutre=0;
+    if($last=$sel_lastnum->fetch())
+    {
+        $numfacutre=$last['numfacture']+1;
+       
+    }
+    else
+    {
+        $numfacutre=1;
+       
+    }
+
+    $type_vente=htmlspecialchars($_POST['type']);
+    $date=date('Y-m-d');
+    $client=$_GET['client'];
+    $req=$connexion->prepare("INSERT INTO commande(dates,client,type,numfacture) values (?,?,?,?)");
+    $req->execute(array($date,$client,$type_vente,$numfacutre));
+    if($req)
+    {
+        $sel_com=$connexion->prepare("SELECT commande.*,client.nom,client.postnom,client.prenom from client,commande where commande.client=client.numero and commande.dates=? and  commande.client=? order by commande.id desc LIMIT 1");
+        $sel_com->execute(array($date,$client));
+        $com=$sel_com->fetch();
+        $idcom=$com['id'];
+        header("location:../../views/sortie.php?new&com=$idcom");
+    }
+}
 
 if (isset($_POST['valider'])){
     $type=htmlspecialchars($_POST['type']);
