@@ -135,7 +135,7 @@ function saveAsImage() {
     const invoiceElement = document.getElementById('invoice');
     html2canvas(invoiceElement).then(canvas => {
         const link = document.createElement('a');
-        link.download = 'facture.png';
+        link.download = 'commande.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     });
