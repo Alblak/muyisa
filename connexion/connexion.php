@@ -51,5 +51,20 @@ else
 	$total_remuneration=0;
 }	
 
-$_SESSION['caisse']=$total_reste+$total_sortie-$total_remuneration-$total_appro;
+$sel_bondesortie=$connexion->prepare("SELECT sum(montant ) as total from bondesortie  where supprimer=0");
+$sel_bondesortie->execute();
+if($total_bondesortie=$sel_bondesortie->fetch())
+{
+	$total_bondesortie=$total_bondesortie['total'];
+}
+else
+{
+	$total_bondesortie=0;
+}
+
+
+
+
+
+$_SESSION['caisse']=$total_reste+$total_sortie-$total_remuneration-$total_appro-$total_bondesortie;
 ?>
