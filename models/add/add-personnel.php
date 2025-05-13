@@ -3,7 +3,7 @@ include('../../connexion/connexion.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-    
+    $date=date('Y-m-d');
     $nom=htmlspecialchars($_POST['nom']);
     $postnom=htmlspecialchars($_POST['postnom']);
     $prenom=htmlspecialchars($_POST['prenom']);
@@ -61,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
                     $filePath = $uploadDir . $fileName;
                     if(file_put_contents($filePath, $imageData)) 
                     {
-                            $req=$connexion->prepare("INSERT INTO personnel (matricule,nom,postnom,prenom,photo,genre,telephone,fonction,salaire) values (?,?,?,?,?,?,?,?,?)");
-                            $req->execute(array($matricule,$nom,$postnom,$prenom,$fileName,$genre,$telephone,$fonction,$salaire)); 
+                            $req=$connexion->prepare("INSERT INTO personnel (matricule,nom,postnom,prenom,photo,genre,telephone,fonction,salaire,date_embauche) values (?,?,?,?,?,?,?,?,?,?)");
+                            $req->execute(array($matricule,$nom,$postnom,$prenom,$fileName,$genre,$telephone,$fonction,$salaire,$date)); 
 
 
                             if($req){

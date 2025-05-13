@@ -35,6 +35,8 @@ if(!isset($_SESSION['fonction']) || empty($_SESSION['fonction'] ))
                 <li ><a href="../views/commande_ap.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-arrow-down-circle-fill text-white"></i><strong> <span>commande carburant</span></strong></a></li>
                 <li ><a href="../views/approvisionnement.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-arrow-down-circle-fill text-white"></i><strong> <span>approvisionnement</span></strong></a></li>
                 <li ><a href="../views/personnel.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-people text-white"></i><strong> <span>personnel</span></strong></a></li>
+                <li ><a href="../views/remuneration.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-calculator-fill text-white"></i><strong> <span>Remuneration</span></strong></a></li>
+               
                
           <?php } else if($_SESSION['fonction']=="caissiere"){?>
                  <li ><a href="../views/client.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-people text-white"></i><strong> <span>Client</span></strong></a></li>
