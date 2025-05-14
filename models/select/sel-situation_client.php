@@ -23,9 +23,24 @@ if(isset($_GET['idclient']))
     $SelData->execute(array($client));
 
 
-    $sel_dette=$connexion->prepare("SELECT sum(panier.prixunitaire*panier.quantite) as total from panier,commande where panier.commande=commande.id and commande.supprimer=0 and commande.type=0 and commande.client=?");
+    $sel_payer=$connexion->prepare("SELECT  sum(paiment_dette.montant) as total from paiment_dette,client,commande where paiment_dette.commande=commande.id and commande.client=client.numero and  commande.client=?");
+    $sel_payer->execute(array($client));
+    $payer=$sel_payer->fetch();
+    if($payer['total']!="")
+    {
+        $total_payer=$payer['total'];
+    }
+    else
+    {
+        $total_payer=0;
+    }
+  
+
+
+    $sel_dette=$connexion->prepare("SELECT sum(panier.prixunitaire*panier.quantite) as total from panier,commande where panier.commande=commande.id and commande.supprimer=0 and commande.type=2 and commande.client=?");
     $sel_dette->execute(array($client));
-    if($dette=$sel_dette->fetch())
+    $dette=$sel_dette->fetch();
+    if($dette['total']!="")
     {
         $total_dette=$dette['total'];
     }
@@ -33,6 +48,8 @@ if(isset($_GET['idclient']))
     {
         $total_dette=0;
     }
+
+    $total_dette_gen=$total_dette-$total_payer;
     $SelDetail=$connexion->prepare("SELECT * from client where numero=?");
     $SelDetail->execute(array($client));
     $detail=$SelDetail->fetch();

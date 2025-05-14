@@ -17,9 +17,10 @@ else
 	$total_reste=0;
 }
 
-$sel_tot_sortie=$connexion->prepare("SELECT sum(panier.prixunitaire*panier.quantite) as total from panier,commande where panier.commande=commande.id and commande.supprimer=0;");
+$sel_tot_sortie=$connexion->prepare("SELECT sum(panier.prixunitaire*panier.quantite) as total from panier,commande where panier.commande=commande.id and commande.type=1 and commande.supprimer=0;");
 $sel_tot_sortie->execute();
-if($tot_sortie=$sel_tot_sortie->fetch())
+$tot_sortie=$sel_tot_sortie->fetch();
+if($tot_sortie['total']!=0)
 {
 	$total_sortie=$tot_sortie['total'];
 
@@ -28,6 +29,21 @@ else
 {
 	$total_sortie=0;
 }
+
+$sel_tot_paiement_dette=$connexion->prepare("SELECT sum(montant) as total from paiment_dette  where supprimer=0;");
+$sel_tot_paiement_dette->execute();
+$tot_paiement_dette=$sel_tot_paiement_dette->fetch();
+if($tot_paiement_dette['total']!=0)
+{
+	$total_paiement_dette=$tot_paiement_dette['total'];
+
+}
+else
+{
+	$total_sortie=0;
+}
+
+
 $sel_tot_appro=$connexion->prepare("SELECT sum(panier_ap.prixunitaire*panier_ap.quantite) as total from panier_ap,commande_ap where panier_ap.commande=commande_ap.id and commande_ap.supprimer=0");
 $sel_tot_appro->execute();
 if($tot_appro=$sel_tot_appro->fetch())
@@ -66,7 +82,7 @@ else
 
 
 
-$_SESSION['caisse']=$total_reste+$total_sortie-$total_remuneration-$total_appro-$total_bondesortie;
+$_SESSION['caisse']=$total_reste+$total_sortie+$total_paiement_dette-$total_remuneration-$total_appro-$total_bondesortie;
 
 
 

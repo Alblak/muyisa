@@ -151,7 +151,7 @@ include_once('../include/menu.php');
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 row">
                                         <div class="col-6 shadow p-3 m-3">
-                                            TOTAL DETTE : <?=$total_dette?> $
+                                            TOTAL DETTE : <?=$total_dette_gen?> $
                                         </div>
                                         <div class="col-4 shadow p-3 m-3">
                                             <div class="row">
