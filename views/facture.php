@@ -50,15 +50,26 @@ if(isset($_GET['com']))
 
 <body class='m-3'>
 <div class="row ">
-    <div class="col-6 no-print mb-3">
-        <a href="sortie.php?new" class="btn btn-success col-12 me-2">Nouvelle Facture</a>
-    </div>
-    <!-- <div class="col-6 no-print mb-3">
-        <button onclick="window.print()" class="btn btn-success col-12 me-2">Imprimer</button>
-    </div> -->
-    <div class="col-6 no-print mb-3">
-        <button onclick="saveAsImage()" class="btn btn-dark col-12 me-2">Imprimer</button>
-    </div>
+
+    <?php if($_SESSION['fonction']=="comptable"){?>
+
+         <!-- <div class="col-6 no-print mb-3">
+            <button onclick="window.print()" class="btn btn-success col-12 me-2">Imprimer</button>
+        </div> -->
+        <div class="col-12 no-print mb-3">
+            <button onclick="saveAsImage()" class="btn btn-dark col-12 me-2">Imprimer</button>
+         </div>
+    <?php }else{?>
+        <div class="col-6 no-print mb-3">
+            <a href="sortie.php?new" class="btn btn-success col-12 me-2">Nouvelle Facture</a>
+        </div>
+        <!-- <div class="col-6 no-print mb-3">
+            <button onclick="window.print()" class="btn btn-success col-12 me-2">Imprimer</button>
+        </div> -->
+        <div class="col-6 no-print mb-3">
+            <button onclick="saveAsImage()" class="btn btn-dark col-12 me-2">Imprimer</button>
+         </div>
+    <?php  } ?>
 </div>
 
 <div class="m-3" id="invoice">

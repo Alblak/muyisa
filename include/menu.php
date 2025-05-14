@@ -42,6 +42,10 @@ if(!isset($_SESSION['fonction']) || empty($_SESSION['fonction'] ))
           <?php } else if($_SESSION['fonction']=="caissiere"){?>
                  <li ><a href="../views/client.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-people text-white"></i><strong> <span>Client</span></strong></a></li>
                  <li ><a href="../views/sortie.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-arrow-left-circle-fill text-white"></i><strong> <span>sortie</span></strong></a></li>
+                  
+         <?php } else if($_SESSION['fonction']=="comptable"){?>
+                 <li ><a href="../views/stock.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-box-seam text-white"></i><strong> <span>Verifier stock</span></strong></a></li>
+                 <li ><a href="../views/situation_client.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-bar-chart-fill text-white"></i><strong> <span>situation client</span></strong></a></li>
           <?php } else { ?>
                  <li ><a href="../views/utilisateur.php" class="nav-link scrollto active pb-0 mb-0"><i class="bi bi-people text-white"></i><strong> <span>users</span></strong></a></li>
           <?php } ?>
