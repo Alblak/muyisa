@@ -167,6 +167,8 @@ include_once('../include/menu.php');
                                         while($data=$SelData->fetch())
                                         {
                                             $numero++;
+                                            $today=date('Y-m-d');
+
                                         ?>
                                        <tr>
                                             <th scope="row"><?php echo $numero; ?></th>
@@ -175,13 +177,19 @@ include_once('../include/menu.php');
                                             <td><?=$data['libelle']?></td>
                                             <td><?=$data['montant'] ?>$</td>
                                           
-                                            <td> <a href="?new&id=<?=$data['id']?>" class="btn btn-dark btn-sm "><i
-                                            class="bi bi-pencil-square"></i></a>
-                                            <a href="bondesortie_view.php?bon=<?=$data['id']?>" class="btn btn-success btn-sm "><i
-                                             class="bi bi-eye-fill"></i></a>
+                                            <td>
+                                            <?php if($data['dates'] == $today) { ?>
+                                                <a href="?new&id=<?=$data['id']?>" class="btn btn-dark btn-sm "><i
+                                                class="bi bi-pencil-square"></i></a>
+                                                <a href="bondesortie_view.php?bon=<?=$data['id']?>" class="btn btn-success btn-sm "><i
+                                                class="bi bi-eye-fill"></i></a>
+                                           
+                                            
+                                           
 
                                               <a   href="?idsup=<?=$data['id']?>"
                                                 class="btn btn-dark btn-sm "><i class="bi bi-trash3-fill"></i></a>
+                                            <?php }else  { echo "---";}?>
                                         </td>
 
                                        </tr>

@@ -164,8 +164,8 @@ include_once('../include/menu.php');
                                                     <label for="">Achat par</span></label>
                                                     <select name="type_achat" id="type_achat" class="form-select">
                                                         
-                                                            <option value="litre">litre  </option>
-                                                            <option value="fut">fut</option>
+                                                            <option value="litre">Detail </option>
+                                                            <option value="fut">Gros</option>
                                                         
                                                     
                                                     </select>
@@ -245,11 +245,20 @@ include_once('../include/menu.php');
                                                     $PT=$data['prixunitaire']*$data['quantite'];
                                                     $total=$total+$PT;
                                                     $totalo=$total;
+                                                
+                                                    if($data['type_achat']=="fut")
+                                                    {
+                                                        $designation="gros";
+                                                    }
+                                                    else
+                                                    {
+                                                        $designation="detail";
+                                                    }
                                                 ?>
                                                 <tr>
                                                     <td><?=$data['quantite']?></td>
                                                    
-                                                    <td><?=$data['type_achat']." ".$data['type']?></td>
+                                                    <td><?=$designation." ".$data['type']?></td>
                                                    
                                                     <td><?=$data['prixunitaire']?> $</td>
                                                     <td><?=$PT?> $</td>

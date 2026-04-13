@@ -141,7 +141,7 @@ include_once('../include/menu.php');
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 ">
                                    
-                                        <?php if(isset($_GET['numero'])){?>
+                                        <?php if(isset($_GET['matricule'])){?>
                                         <div class="row">
                                             <div class="col-xl-8 col-lg-8 col-md-8  col-sm-8">
                                                 <input type="submit" class="btn btn-success text-white p-2 mt-1 w-100" name="valider" value="<?=$bouton?>">

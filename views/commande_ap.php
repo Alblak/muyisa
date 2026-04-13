@@ -78,7 +78,7 @@ include_once('../include/menu.php');
     
             <div class="col-120 bg-black position-fixed m-auto p-3">
             
-                <h2 class=" text-white">commande_ap</h2>
+                <h2 class=" text-white">commande approvisionnement</h2>
               
             </div><!-- End Page Title -->
        
@@ -101,7 +101,7 @@ include_once('../include/menu.php');
                                     
                                 </div>
                                 <div class="card-body py-3  text-white">
-                                    Voulez-vous vraiment supprimer l'commande_ap de "<b> <?=$supprimer['nom']."  ".$supprimer['postnom']." d'une quantite de ".$supprimer['quantite']." L au prix de  ".$supprimer['prix']?> par L </b>"?
+                                    Voulez-vous vraiment supprimer la commande  de "<b> <?=$supprimer['prenom']." d'une quantite de ".$supprimer['quantite']." m3 au de  ".$supprimer['type']?> du  <?php  echo date('d-m-Y',strtotime($supprimer["dates"])) ?>  </b>"?
                                     <br>
                                     <em class="mt-3 text-danger">NB: cette action est irréversible</em>
                                 </div>
@@ -323,7 +323,7 @@ include_once('../include/menu.php');
                 <?php }  ?>
                             <div class=" table-responsive shadow p-3">
                                 <table class="table table-borderless datatable   ">
-                                <h4 class="p-3 ">Liste d'commande_ap</h4>
+                                <h4 class="p-3 ">Liste des commandes</h4>
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>

@@ -3,14 +3,14 @@ if(isset($_GET['id']))
 {
     $id=$_GET['id'];
     $supprimer=1;
-    $req=$connexion->prepare("DELETE  from   entree  where id=?");
-    $req->execute(array($id));
+    $req=$connexion->prepare("UPDATE  fournisseur SET supprimer=? where id=?");
+    $req->execute(array($supprimer,$id));
     if($req)
     {
         $_SESSION['notif']="Suppression  reussie";
         $_SESSION['color']='success';
         $_SESSION['icon']="trash3-fill";
-        header('location:../../views/approvisionnement.php');
+        header('location:../../views/fournisseur.php');
     }
 }
 ?>

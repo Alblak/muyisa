@@ -13,10 +13,28 @@ if(isset($_GET['id']))
 else if(isset($_GET['idsup']))
 {
     $id=$_GET['idsup'];
-    $req=$connexion->prepare("SELECT * from commande where id=?");
+    $req=$connexion->prepare("SELECT commande.client,commande.dates,panier.quantite,panier.type,panier.prixunitaire from commande,panier  where commande.id=panier.commande and  commande.id=?");
     $req->execute(array($id));
     $supprimer=$req->fetch();
+    $client=$supprimer['client'];
+    echo $client;
+    
+        $sel_client=$connexion->prepare("SELECT * from client where numero=?");
+        $sel_client->execute(array($client));
+       if( $info_client=$sel_client->fetch())
+       
+        {
+            $client_nom=$info_client['nom']." ".$info_client['postnom']." ".$info_client['prenom'];
+            
+        }
+        else
+        {
+            $client_nom=$client;
+        }
+    
     $titre="";
+
+    
 }
 if(isset($_GET['idexp'])){
     $idexp=$_GET['idexp'];

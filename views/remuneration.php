@@ -67,7 +67,7 @@ include_once('../include/menu.php');
                                     
                                 </div>
                                 <div class="card-body py-3  text-white">
-                                    Voulez-vous vraiment supprimer l'sortie de "<b> <?=$supprimer['nom']."  ".$supprimer['postnom']." d'une quantite de ".$supprimer['quantite']." L au prix de  ".$supprimer['prix']?> par L </b>"?
+                                    Voulez-vous vraiment supprimer la remuneration  de "<b> <?=$supprimer['nom']."  ".$supprimer['postnom']." de ".$supprimer['montant']?> $  payer le  <?php  echo date('d/m/Y',strtotime($supprimer["dates"])); ?></b>"?
                                     <br>
                                     <em class="mt-3 text-danger">NB: cette action est irréversible</em>
                                 </div>
@@ -289,6 +289,7 @@ include_once('../include/menu.php');
                                         while($data=$SelData->fetch())
                                         {
                                             $numero++;
+                                            $today=date('Y-m-d');
                                         ?>
                                        <tr>
                                             <th scope="row"><?php echo $numero; ?></th>
@@ -298,11 +299,11 @@ include_once('../include/menu.php');
                                             <td><?=$data['montant'] ?>$</td>
                                           
                                             <td>
-                                            <a href="recu.php?com=<?=$data['id']?>" class="btn btn-success btn-sm "><i
-                                             class="bi bi-eye-fill"></i></a>
-
+                                                <?php if($data['dates'] == $today) { ?>
+                                           
                                               <a   href="?idsup=<?=$data['id']?>"
                                                 class="btn btn-dark btn-sm "><i class="bi bi-trash3-fill"></i></a>
+                                                <?php }else  { echo "---";}?>
                                         </td>
 
                                        </tr>

@@ -60,7 +60,7 @@ include_once('../include/menu.php');
                                     
                                 </div>
                                 <div class="card-body py-3  text-white">
-                                    Voulez-vous vraiment supprimer  l'approvisionnement"<b> <?=$supprimer['quantite']."L de quantite  et  de  ".$supprimer['montant']."$ du  "?> <?php $dates=strtotime($supprimer["dates"]); echo date('d/m/Y ',$dates);?> </b>"?
+                                    Voulez-vous vraiment supprimer  l'approvisionnement"<b> <?=$supprimer['quantite']."L / ".$supprimer['type']." du  "?> <?php $dates=strtotime($supprimer["dates"]); echo date('d/m/Y ',$dates);?> </b>"?
                                     <br>
                                     <em class="mt-3 text-danger">NB: cette action est irréversible</em>
                                 </div>
@@ -196,11 +196,14 @@ include_once('../include/menu.php');
                                             <td><?=$data['PR']?> $</td>
                                             <td><?=$data['reste_argent']?> $</td>
                                             <td>
-                                                <a href="approvisionnement.php?id=<?=$data['id']?>" class="btn btn-success btn-sm "><i
-                                                        class="bi bi-pencil-square"></i></a>
+                                                <?php 
+                                                $leo=date("Y-m-d");
+                                                if($data['dates']==$leo){
+                                                ?>
                                                 <a 
                                                     href="?idsup=<?=$data['id']?>"
                                                     class="btn btn-dark btn-sm "><i class="bi bi-trash3-fill"></i></a>
+                                                <?php } else { echo "---";}?>
                                             </td>
 
                                        </tr>

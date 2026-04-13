@@ -275,7 +275,7 @@ while($data = $SelpanierE->fetch()){
         
         <div class="invoice-details">
           <div class="invoice-number">Facture n° <?php echo sprintf('%04d', $detail['numfacture']);?></div>
-          <div>Bukavu, le <?php $dates=strtotime($detail["dates"]); echo date('d/m/Y ',$dates);?></div>
+          <div>Butembo, le <?php $dates=strtotime($detail["dates"]); echo date('d/m/Y ',$dates);?></div>
         </div>
       </div>
       
@@ -296,10 +296,18 @@ while($data = $SelpanierE->fetch()){
           </tr>
         </thead>
         <tbody>
-          <?php foreach($panierData as $data): ?>
+          <?php foreach($panierData as $data): 
+            if($data['type_achat']=="fut")
+                                   {
+                                                $designation="gros";
+                                                    }
+                                                    else
+                                                    {
+                                                        $designation="detail";
+                                                    }?>
           <tr>
             <td><?=$data['quantite']?></td>
-            <td><?=$data['type_achat']?> <?=$data['type']?></td>
+            <td><?=$designation?> <?=$data['type']?></td>
             <td><?=$data['prixunitaire']?> $</td>
             <td><?=$data['prix_total']?> $</td>
           </tr>
@@ -338,10 +346,19 @@ while($data = $SelpanierE->fetch()){
           </tr>
         </thead>
         <tbody>
-          <?php foreach($panierDataE as $data): ?>
+          <?php foreach($panierDataE as $data):
+            if($data['type_achat']=="fut")
+                                   {
+                                                $designation="gros";
+                                                    }
+                                                    else
+                                                    {
+                                                        $designation="detail";
+                                                    } ?>
+
           <tr>
             <td><?=$data['quantite']?></td>
-            <td><?=$data['type_achat']?> <?=$data['type']?></td>
+            <td><?=$designation?> <?=$data['type']?></td>
             <td><?=$data['prixunitaire']?> $</td>
             <td><?=$data['prix_total']?> $</td>
           </tr>
