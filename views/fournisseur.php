@@ -80,25 +80,25 @@ include_once('../include/menu.php');
                                         
                                          <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 p-3">
                                             <label for="">Nom</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KAMBALE"  name="nom" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['nom']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KAMBALE"  name="nom" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['nom']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 p-3">
                                             <label for="">Postnom</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KILIMA"  name="postnom" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['postnom']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:KILIMA"  name="postnom" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['postnom']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 p-3">
                                             <label for="">Prenom</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:Julien"  name="prenom" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['prenom']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:Julien"  name="prenom" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['prenom']?>" <?php } ?>> 
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
                                             <label for="">Adresse</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:malera"  name="adresse" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['adresse']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="Ex:malera"  name="adresse" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['adresse']?>" <?php } ?>> 
                                         </div>
                                       
                                         
                                         <div class="col-xl-6 col-lg-6 col-md-6  col-sm-6 p-3">
                                             <label for=""> N° Telephone</span></label>
-                                            <input autocomplete="off" required type="text" class="form-control" placeholder="ex:0991147624"  name="telephone" <?php if(isset($_GET['numero'])){ ?> value="<?=$modData['telephone']?>" <?php } ?>> 
+                                            <input autocomplete="off" required type="text" class="form-control" placeholder="ex:0991147624"  name="telephone" <?php if(isset($_GET['id'])){ ?> value="<?=$modData['telephone']?>" <?php } ?>> 
                                         </div>
                                       
                                                         <div class="col-xl-12 col-lg-12 col-md-12 mt-10 col-sm-12 p-3 aling-center">
@@ -113,7 +113,7 @@ include_once('../include/menu.php');
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12 ">
                                    
-                                    <?php if(isset($_GET['numero'])){?>
+                                    <?php if(isset($_GET['id'])){?>
                                       <div class="row">
                                           <div class="col-xl-8 col-lg-8 col-md-8  col-sm-8">
                                             <input type="submit" class="btn btn-success text-white p-2 mt-1 w-100" name="valider" value="<?=$bouton?>">

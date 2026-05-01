@@ -4,6 +4,7 @@ include('../../connexion/connexion.php');
 
 if (isset($_POST["valider"])) 
 {
+    $id=$_GET['id'];
     
     $nom=htmlspecialchars($_POST['nom']);
     $postnom=htmlspecialchars($_POST['postnom']);
@@ -11,8 +12,8 @@ if (isset($_POST["valider"]))
     $adresse=htmlspecialchars($_POST['adresse']);
     $telephone=htmlspecialchars($_POST['telephone']);
 
-    $sel=$connexion->prepare("SELECT * from fournisseur where telephone=?");
-    $sel->execute(array($telephone));
+    $sel=$connexion->prepare("SELECT * from fournisseur where telephone=? and id!=?");
+    $sel->execute(array($telephone,$id));
     if($exist=$sel->fetch())
     {
         $_SESSION['notif']="ce  fournisseur  existe déjà";
@@ -20,7 +21,7 @@ if (isset($_POST["valider"]))
         $_SESSION['icon']="x-circle-fill";
         header('location:../../views/fournisseur.php');
     }
-    else if(!is_numeric($telephone) && strlen($telephone)!=10)
+    if(!is_numeric($telephone) && strlen($telephone)!=10)
     {
         $_SESSION['notif']="numero incorrect";
         $_SESSION['color']='danger';
@@ -37,8 +38,8 @@ if (isset($_POST["valider"]))
     else
     {
           
-        $req=$connexion->prepare("INSERT INTO fournisseur (nom,postnom,prenom,adresse,telephone) values (?,?,?,?,?)");
-        $req->execute(array($nom,$postnom,$prenom,$adresse,$telephone)); 
+        $req=$connexion->prepare("UPDATE   fournisseur SET nom=?,postnom=?,prenom=?,adresse=?,telephone=? where id=?");
+        $req->execute(array($nom,$postnom,$prenom,$adresse,$telephone,$id)); 
         if($req)
         {
              $_SESSION['notif']="Enregistrement reussi";

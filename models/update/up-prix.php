@@ -4,36 +4,25 @@ if(isset($_POST['valider']))
 
 {
     $id=$_GET['id'];
-    $date=date("Y-m-d");
-    $prix_essenceL=htmlspecialchars($_POST['prix_essenceL']);
-    $prix_mazoutL=htmlspecialchars($_POST['prix_mazoutL']);
-    $prix_essenceF=htmlspecialchars($_POST['prix_essenceF']);
-    $prix_mazoutF=htmlspecialchars($_POST['prix_mazoutF']);
+   $date=date("Y-m-d");
 
-    $sel=$connexion->prepare("SELECT * from prix  order by id desc limit 1");
-    $sel->execute();
-    $exist=$sel->fetch();
-    
-    if($exist['prix_essenceL']==$prix_essenceL && $exist['prix_mazoutL']==$prix_mazoutL && $exist['prix_essenceF']==$prix_essenceF && $exist['prix_mazoutF']==$prix_mazoutF)
-    {
-        $_SESSION['notif']="Vous n'avez pas mis a jour le jour car vous avez saisi le meme prix ";
-        $_SESSION['color']='danger';
-        $_SESSION['icon']="x-circle-fill";
-        header("location:../../views/prix.php?id=$id");
-    }
-    else
-    {
-     
-   
-        $req=$connexion->prepare("INSERT INTO prix (dates,prix_essenceL,prix_mazoutL,prix_essenceF,prix_mazoutF) values (?,?,?,?,?)");
-        $req->execute(array($date,$prix_essenceL,$prix_mazoutL,$prix_essenceF,$prix_mazoutF)); 
-         if($req)
-         {
-            $_SESSION['notif']="mise a jour reussi";
-            $_SESSION['color']='success';
-            $_SESSION['icon']="check-circle-fill";
-            header('location:../../views/prix.php');
-        }
+   $sel_exist=$connexion->prepare("SELECT * from prix where id=?");
+   $sel_exist->execute(array($id));
+   $exist=$sel_exist->fetch();
+
+    $prix_detail=htmlspecialchars($_POST['prix_detail']);
+    $prix_gros=htmlspecialchars($_POST['prix_gros']);
+    $type=$exist['type'];
+     $entree=$exist['entree'];
+
+    $req=$connexion->prepare("INSERT INTO prix (dates,type,prix_detail,prix_gros,entree) values (?,?,?,?,?)");
+    $req->execute(array($date,$type,$prix_detail,$prix_gros,$entree,)); 
+     if($req)
+     {
+        $_SESSION['notif']="modification  reussie";
+        $_SESSION['color']='success';
+        $_SESSION['icon']="check-circle-fill";
+        header('location:../../views/prix.php');
     }
 }
 

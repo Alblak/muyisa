@@ -87,16 +87,10 @@ if (isset($_POST['valider'])){
         }
     }
     
-    if($type_achat=='litre')
-    {
+   
         $resultat=($prix-$PR)*$quantite;
-    }
-    else
-    {
-        
-        $resultat=($prix-($PR*207))*($quantite);
-    }
-
+   
+ echo " le resultat est de  $resultat .....le PR est $PR";
    
   
 
@@ -115,17 +109,11 @@ if (isset($_POST['valider'])){
 
             $quantite_up=$exist['quantite']+$quantite;
             echo $quantite_up;
-              if($type_achat=='litre')
-                {
+           
                     $resultat=($prix-$PR)*$quantite_up;
-                }
-                else
-                {
-                    
-                    $resultat=($prix-($PR*207))*($quantite_up);
-                }
-            $up_quantite=$connexion->prepare("UPDATE panier set quantite=? where commande=? and type=? and type_achat=? and resultat=?");
-            $up_quantite->execute(array($quantite_up,$commande,$type,$type_achat,$resultat));
+             
+            $up_quantite=$connexion->prepare("UPDATE panier set quantite=?,resultat=? where commande=? and type=? and type_achat=?");
+            $up_quantite->execute(array($quantite_up,$resultat,$commande,$type,$type_achat,));
             if($up_quantite)
             {
                 $_SESSION['notif']="Une quantite vient d'etre ajouter dans le panier";

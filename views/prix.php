@@ -139,6 +139,7 @@ include_once('../include/menu.php');
                                             </div>
                                             <div class="col-6">
                                                 <H3>prix a jour mazout </H3>
+                                                  <a href="?mod&id=<?=$_SESSION['prix_idM']?>" class="btn btn-dark p-2  mt-1 w-100">Modifier le prix</a>
                                                     <h5>detail: <?=$_SESSION['prix_mazoutL']?></h5>
                                                     <h5>Gros : <?=$_SESSION['prix_mazoutF']?></h5>
                                                 
@@ -198,6 +199,7 @@ include_once('../include/menu.php');
                                         <div class="row">
                                             <div class="col-6">
                                                 <H3>prix a jour essence </H3>
+                                                 <a href="?mod&id=<?=$_SESSION['prix_idL']?>" class="btn btn-dark p-2  mt-1 w-100">Modifier le prix</a>
                                                 <h5>detail: <?=$_SESSION['prix_essenceL']?></h5>
                                                  <h5>Gros : <?=$_SESSION['prix_essenceF']?></h5>
                                                 
@@ -259,11 +261,14 @@ include_once('../include/menu.php');
                                     <div class="row">
                                         <div class="col-6">
                                             <H3>prix a jour essence </H3>
+                                            <a href="?mod&id=<?=$_SESSION['prix_idL']?>" class="btn btn-dark p-2  mt-1 w-100">Modifier le prix</a>
                                                 <h5>detail: <?=$_SESSION['prix_essenceL']?></h5>
                                                  <h5>Gros : <?=$_SESSION['prix_essenceF']?></h5>
+
                                         </div>
                                         <div class="col-6">
-                                            <H3>prix a jour mazout </H3>
+                                            <H3>prix a jour mazout m</H3>
+                                            <a href="?mod&id=<?=$_SESSION['prix_idM']?>" class="btn btn-dark p-2  mt-1 w-100">Modifier le prix</a>
                                                 <h5>detail: <?=$_SESSION['prix_mazoutL']?></h5>
                                                  <h5>Gros : <?=$_SESSION['prix_mazoutF']?></h5>
                                         </div>
@@ -336,7 +341,8 @@ include_once('../include/menu.php');
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                            
+     
+     
                                                 $numero=0;
                                                 while($dataM=$SelDataM->fetch())
                                                 { 

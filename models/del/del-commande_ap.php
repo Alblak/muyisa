@@ -1,9 +1,9 @@
 <?php 
 include('../../connexion/connexion.php');
-if(isset($_GET['iddelcom']))
+if(isset($_GET['iddel']))
 {
-    $id=$_GET['iddelcom'];
-    $req=$connexion->prepare("DELETE FROM commande where id=?");
+    $id=$_GET['iddel'];
+    $req=$connexion->prepare("DELETE FROM commande_ap where id=?");
     $req->execute(array($id));
     if($req){
         $reqq=$connexion->prepare("DELETE FROM panier_ap where commande=?");
@@ -27,7 +27,7 @@ if(isset($_GET['cancel']))
 {
 
     $id=$_GET['cancel'];
-    $req=$connexion->prepare("DELETE FROM commande where id=?");
+    $req=$connexion->prepare("DELETE FROM commande_ap where id=?");
     $req->execute(array($id));
     if($req)
     {

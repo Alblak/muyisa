@@ -1,8 +1,8 @@
 <?php 
 include('../../connexion/connexion.php');
-if(isset($_GET['iddelcom']))
+if(isset($_GET['iddel']))
 {
-    $id=$_GET['iddelcom'];
+    $id=$_GET['iddel'];
     $req=$connexion->prepare("DELETE FROM commande where id=?");
     $req->execute(array($id));
     if($req){

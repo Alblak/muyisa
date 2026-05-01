@@ -54,12 +54,12 @@ while($data = $SelpanierE->fetch()){
   
   <style>
     :root {
-      --primary-color: #2c3e50;
-      --secondary-color: #3498db;
-      --accent-color: #e74c3c;
+      --primary-color: #000000;
+      --secondary-color: #000000;
+      --accent-color: #000000;
       --light-bg: #f8f9fa;
-      --border-color: #dee2e6;
-      --text-color: #333;
+      --border-color: #000000;
+      --text-color: #000000;
     }
     
     body {
@@ -99,7 +99,7 @@ while($data = $SelpanierE->fetch()){
     .invoice-number {
       font-size: 1.5rem;
       font-weight: bold;
-      color: var(--secondary-color);
+      color: #000000;
       margin-bottom: 10px;
     }
     
@@ -113,18 +113,18 @@ while($data = $SelpanierE->fetch()){
     .payment-info {
       display: inline-block;
       padding: 5px 12px;
-      background-color: var(--secondary-color);
+      background-color: #000000;
       color: white;
       border-radius: 4px;
       font-weight: bold;
     }
     
     .payment-info.cash {
-      background-color: #27ae60;
+      background-color: #000000;
     }
     
     .payment-info.credit {
-      background-color: var(--accent-color);
+      background-color: #000000;
     }
     
     .invoice-table {
@@ -134,11 +134,14 @@ while($data = $SelpanierE->fetch()){
     }
     
     .invoice-table th {
-      background-color: var(--primary-color);
-      color: white;
+      background-color: #f0f0f0;
+      color: #000000;
       padding: 12px 15px;
       text-align: left;
-      font-weight: 600;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      border-bottom: 2px solid #000000;
     }
     
     .invoice-table td {
@@ -186,18 +189,19 @@ while($data = $SelpanierE->fetch()){
     }
     
     .btn-primary {
-      background-color: var(--secondary-color);
+      background-color: #000000;
       color: white;
     }
     
     .btn-success {
-      background-color: #27ae60;
+      background-color: #000000;
       color: white;
     }
     
     .btn-dark {
-      background-color: var(--primary-color);
+      background-color: #000000;
       color: white;
+    }
     }
     
     .btn:hover {
@@ -275,7 +279,7 @@ while($data = $SelpanierE->fetch()){
         
         <div class="invoice-details">
           <div class="invoice-number">Facture n° <?php echo sprintf('%04d', $detail['numfacture']);?></div>
-          <div>Bukavu, le <?php $dates=strtotime($detail["dates"]); echo date('d/m/Y ',$dates);?></div>
+          <div>Butembo, le <?php $dates=strtotime($detail["dates"]); echo date('d/m/Y ',$dates);?></div>
         </div>
       </div>
       
@@ -296,10 +300,18 @@ while($data = $SelpanierE->fetch()){
           </tr>
         </thead>
         <tbody>
-          <?php foreach($panierData as $data): ?>
+          <?php foreach($panierData as $data): 
+            if($data['type_achat']=="fut")
+                                   {
+                                                $designation="gros";
+                                                    }
+                                                    else
+                                                    {
+                                                        $designation="detail";
+                                                    }?>
           <tr>
             <td><?=$data['quantite']?></td>
-            <td><?=$data['type_achat']?> <?=$data['type']?></td>
+            <td><?=$designation?> <?=$data['type']?></td>
             <td><?=$data['prixunitaire']?> $</td>
             <td><?=$data['prix_total']?> $</td>
           </tr>
@@ -338,10 +350,19 @@ while($data = $SelpanierE->fetch()){
           </tr>
         </thead>
         <tbody>
-          <?php foreach($panierDataE as $data): ?>
+          <?php foreach($panierDataE as $data):
+            if($data['type_achat']=="fut")
+                                   {
+                                                $designation="gros";
+                                                    }
+                                                    else
+                                                    {
+                                                        $designation="detail";
+                                                    } ?>
+
           <tr>
             <td><?=$data['quantite']?></td>
-            <td><?=$data['type_achat']?> <?=$data['type']?></td>
+            <td><?=$designation?> <?=$data['type']?></td>
             <td><?=$data['prixunitaire']?> $</td>
             <td><?=$data['prix_total']?> $</td>
           </tr>

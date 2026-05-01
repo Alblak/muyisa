@@ -14,14 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
     $matricule="";
     if(!is_numeric($telephone))
     {
-        $_SESSION['notif']="matricule incorrect";
+        $_SESSION['notif']="numero incorrect";
         $_SESSION['color']='danger';
         $_SESSION['icon']="x-circle-fill";
         header('location:../../views/personnel.php');
     }
     else if(strlen($telephone)!=10)
     {
-        $_SESSION['notif']="nombre de chiffre  du matricule est incorrect";
+        $_SESSION['notif']="nombre de chiffre  du numero est incorrect";
         $_SESSION['color']='danger';
         $_SESSION['icon']="x-circle-fill";
         header('location:../../views/personnel.php');

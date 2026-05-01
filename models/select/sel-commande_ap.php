@@ -16,7 +16,7 @@ if(isset($_GET['id']))
 else if(isset($_GET['idsup']))
 {
     $id=$_GET['idsup'];
-    $req=$connexion->prepare("SELECT * from commande_ap where id=?");
+    $req=$connexion->prepare("SELECT fournisseur.prenom,commande_ap.dates,commande_ap.id,commande_ap.numcommande,panier_ap.quantite,panier_ap.type FROM fournisseur,commande_ap,panier_ap WHERE fournisseur.id=commande_ap.fournisseur AND commande_ap.id=panier_ap.commande and commande_ap.id=?");
     $req->execute(array($id));
     $supprimer=$req->fetch();
     $titre="";
